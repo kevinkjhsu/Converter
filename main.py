@@ -5,14 +5,15 @@ import time
 clock = sg.Text("", key="CLOCK")
 label_text = sg.Text("Select unit to convert.", key="LABEL")
 converts = sg.Spin(["Length", "Weight", "Area"], enable_events=True, key="CONVERTS", size=10)
-result_label1 = sg.Text("Meter", key="RESULT_LABEL1")
+result_label1 = sg.Text("Unit1", key="RESULT_LABEL1")
 result1 = sg.Input(tooltip="Enter a number to convert", enable_events=True, key="RESULT1")
 col1 = [[result_label1], [result1]]
-result_label2 = sg.Text("feet", key="RESULT_LABEL2")
+result_label2 = sg.Text("Unit2", key="RESULT_LABEL2")
 result2 = sg.Input(tooltip="Enter a number to convert", enable_events=True, key="RESULT2")
 col2 = [[result_label2], [result2]]
 exit_button = sg.Button("Exit", key="EXIT")
 clear_button = sg.Button("Clear", key="CLEAR")
+sg.theme("BrightColors")
 layout = [
     [clock],
     [label_text, converts],
@@ -40,8 +41,13 @@ while True:
             elif value["CONVERTS"] == "Area":
                 window["RESULT_LABEL1"].update("Square meter")
                 window["RESULT_LABEL2"].update("Square feet")
+        case "RESULT1":
+            window["RESULT2"].update("value entered")
+        case "RESULT2":
+            window["RESULT1"].update("value entered")
         case "CLEAR":
-            window["RESULT"].update("")
+            window["RESULT1"].update("")
+            window["RESULT2"].update("")
         case sg.WIN_CLOSED:
             break
         case "EXIT":
