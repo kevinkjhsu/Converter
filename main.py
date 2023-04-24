@@ -51,39 +51,49 @@ while True:
                 window["RESULT1"].update("")
                 window["RESULT2"].update("")
         case "RESULT1":
-            try:
-                if value["CONVERTS"] == "SELECT":
-                    sg.popup("Please select a unit to convert.")
+            result = value["RESULT1"]
+            if result:
+                try:
+                    if value["CONVERTS"] == "SELECT":
+                        sg.popup("Please select a unit to convert.")
+                        window["RESULT1"].update("")
+                    if value["CONVERTS"] == "Length":
+                        length = value["RESULT1"]
+                        window["RESULT2"].update(ct.m_ft(length))
+                    elif value["CONVERTS"] == "Weight":
+                        weight = value["RESULT1"]
+                        window["RESULT2"].update(ct.kg_lb(weight))
+                    elif value["CONVERTS"] == "Area":
+                        area = value["RESULT1"]
+                        window["RESULT2"].update(ct.sqm_sqft(area))
+                except ValueError:
+                    sg.popup("Please enter numeric value.")
                     window["RESULT1"].update("")
-                if value["CONVERTS"] == "Length":
-                    length = value["RESULT1"]
-                    window["RESULT2"].update(ct.m_ft(length))
-                elif value["CONVERTS"] == "Weight":
-                    weight = value["RESULT1"]
-                    window["RESULT2"].update(ct.kg_lb(weight))
-                elif value["CONVERTS"] == "Area":
-                    area = value["RESULT1"]
-                    window["RESULT2"].update(ct.sqm_sqft(area))
-            except:
-                sg.popup("Please enter numeric value.")
-                window["RESULT1"].update("")
-        case "RESULT2":
-            try:
-                if value["CONVERTS"] == "SELECT":
-                    sg.popup("Please select a unit to convert.")
-                    window["RESULT1"].update("")
-                if value["CONVERTS"] == "Length":
-                    length = value["RESULT2"]
-                    window["RESULT1"].update(ct.ft_m(length))
-                elif value["CONVERTS"] == "Weight":
-                    weight = value["RESULT2"]
-                    window["RESULT1"].update(ct.lb_kg(weight))
-                elif value["CONVERTS"] == "Area":
-                    area = value["RESULT2"]
-                    window["RESULT1"].update(ct.sqft_sqm(area))
-            except:
-                sg.popup("Please enter numeric value.")
+                    window["RESULT2"].update("")
+            else:
                 window["RESULT2"].update("")
+        case "RESULT2":
+            result = value["RESULT2"]
+            if result:
+                try:
+                    if value["CONVERTS"] == "SELECT":
+                        sg.popup("Please select a unit to convert.")
+                        window["RESULT1"].update("")
+                    if value["CONVERTS"] == "Length":
+                        length = value["RESULT2"]
+                        window["RESULT1"].update(ct.ft_m(length))
+                    elif value["CONVERTS"] == "Weight":
+                        weight = value["RESULT2"]
+                        window["RESULT1"].update(ct.lb_kg(weight))
+                    elif value["CONVERTS"] == "Area":
+                        area = value["RESULT2"]
+                        window["RESULT1"].update(ct.sqft_sqm(area))
+                except ValueError:
+                    sg.popup("Please enter numeric value.")
+                    window["RESULT1"].update("")
+                    window["RESULT2"].update("")
+            else:
+                window["RESULT1"].update("")
         case "CLEAR":
             window["CONVERTS"].update("Select")
             window["RESULT_LABEL1"].update("Unit1")
