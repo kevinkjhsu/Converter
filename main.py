@@ -67,7 +67,7 @@ while True:
                         area = value["RESULT1"]
                         window["RESULT2"].update(ct.sqm_sqft(area))
                 except ValueError:
-                    sg.popup("Please enter numeric value.")
+                    sg.popup_OK("Please enter numeric value.", keep_on_top=True)
                     window["RESULT1"].update("")
                     window["RESULT2"].update("")
             else:
@@ -89,7 +89,7 @@ while True:
                         area = value["RESULT2"]
                         window["RESULT1"].update(ct.sqft_sqm(area))
                 except ValueError:
-                    sg.popup("Please enter numeric value.")
+                    sg.popup("Please enter numeric value.", keep_on_top=True)
                     window["RESULT1"].update("")
                     window["RESULT2"].update("")
             else:
